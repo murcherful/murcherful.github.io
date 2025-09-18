@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Changfeng Ma</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!--Montserrat font-->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles2.css" />
+    <script src="https://unpkg.com/feather-icons@4.28.0/dist/feather.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </head>
+  <body>   
+    <section>
+      <!-- MOBILE NAVIGATION -->
+      <div class="w3-container w3-padding-16 w3-border-bottom w3-hide-medium w3-hide-large">
+        <a href="#me" class="w3-bar-item w3-button w3-hover-none">ME</a>
+        <a href="javascript:void(0)" class="w3-bar-item w3-button w3-right w3-hide-large w3-hide-medium" onclick="toggleNavigation()">&#9776;</a>
+      </div>
+      <div id="mobile-nav" class="w3-bar-block w3-hide w3-hide-large w3-hide-medium w3-sticky">
+        <a href="#biography" class="w3-bar-item w3-button w3-center w3-hover-none w3-border-white w3-bottombar w3-hover-border-green w3-hover-text-green" onclick="toggleNavigation()">BIOGRAPHY</a>
+        <a href="#publication" class="w3-bar-item w3-button w3-center w3-hover-none w3-border-white w3-bottombar w3-hover-border-green w3-hover-text-green" onclick="toggleNavigation()">PUBLICATION</a>
+        <a href="#contact" class="w3-bar-item w3-button w3-center w3-hover-none w3-border-white w3-bottombar w3-hover-border-green w3-hover-text-green" onclick="toggleNavigation()">CONTACT</a>
+      </div>
+
+      <!-- SOCIAL SECTION -->
+      <section class="image-section w3-quarter w3-fixed w3-padding-small">
+        <!--IMAGE/AVATAR-->
+        <img src="mcf.jpg" class="w3-circle w3-border w3-border-sand" style="border-width: 3px !important;"/>
+        <div class="w3-text-sand w3-margin-top-2 w3-hover-text-amber">
+            <p style="font-style: italic; font-size:x-large;">Changfeng Ma</p>
+            <p style="font-style: italic; font-size:x-large;">PhD Student</p>
+        </div>
+        <!--SCIAL NETWORK BUTTONS-->
+        <div class="links w3-padding-small">
+          
+          <a class="icon-link w3-text-sand w3-hover-text-amber" href="https://github.com/murcherful" target="_blank">
+              <i data-feather="github"></i>
+          </a>
+          <a class="icon-link w3-text-sand w3-hover-text-amber" href="#contact">
+             <i data-feather="mail"></i>
+          </a>
+          <a class="icon-link w3-text-sand w3-hover-text-amber" href="http://njumeta.com/macf/" target="_blank">
+             <i data-feather="sun"></i>
+          </a>
+          <a class="icon-link w3-text-sand w3-hover-text-amber" href="https://changfengma.w3spaces.com" target="_blank">
+             <i data-feather="moon"></i>
+          </a>
+        </div>
+      </section>
+
+      <!--CV CONTENT SECTION-->
+      <section class="w3-threequarter w3-padding-large w3-right">
+        <!--DESKTOP NAVIGATION-->
+        <div class="w3-container w3-padding-large w3-border-bottom w3-hide-small">
+          <a href="#me" class="w3-bar-item w3-button w3-hover-none w3-border-white w3-bottombar w3-hover-border-green">ME</a>
+          <a href="#contact" class="w3-bar-item w3-button w3-hover-none w3-border-white w3-bottombar w3-hover-border-green w3-hover-text-green w3-right w3-hide-small" style="border-width: 2px !important;" onclick="toggleNavigation()">CONTACT</a>
+          <a href="#publication" class="w3-bar-item w3-button w3-hover-none w3-border-white w3-bottombar w3-hover-border-green w3-hover-text-green w3-right w3-hide-small" style="border-width: 2px !important;" onclick="toggleNavigation()">PUBLICATION</a>
+          <a href="#biography" class="w3-bar-item w3-button w3-hover-none w3-border-white w3-bottombar w3-hover-border-green w3-hover-text-green w3-right w3-hide-small" style="border-width: 2px !important;" onclick="toggleNavigation()">BIOGRAPHY</a>
+        </div>
+        <div class="content-container w3-margin-top-2">
+          <!--HOME SECTION-->
+          <div id="me" class="home w3-container w3-margin-top-4 w3-cursive">
+            <!--<p style="font-style: italic; font-size:x-large;">"Nothing"</p>-->
+            <h1>马常风</h1>
+            <h1>Changfeng Ma</h1>
+            <h2>Nanjing University</h2>
+            <p>
+            PhD Student, <a href="http://www.njumeta.com/">NJU Meta Graphics & 3D Vision Lab</a>,
+            <a href="http://cs.nju.edu.cn//">Computer Science and Technology</a>,
+            <a href="http://www.nju.edu.cn/">Nanjing University</a>, Nanjing, China, 210023.
+            </p>
+            <p>
+            Supervisor: Prof.
+            <a href="http://cs.nju.edu.cn/ywguo">Yanwen Guo</a> 
+            </p>
+            <p>
+                ORCID: <a href="https://orcid.org/my-orcid?orcid=0000-0001-8732-7038">0000-0001-8732-7038</a>
+            </p>
+          </div>
+
+          <!--ABOUT SECTION-->
+          <div id="biography" class="w3-container w3-margin-top-10-percent w3-cursive w3-large">
+            <h2 class="w3-border-bottom w3-border-amber" style="border-width: 3px !important;">BIOGRAPHY</h2>
+            <p class="w3-margin-top-2"> 
+             I received my bachelor's degree (2021) from the department of Computer Science and Technology (Honored Class) at Nanjing University. I am currently working toward the PhD degree in the department of Computer Science and Technology at Nanjing University. My research interests include 3D computer vision and point cloud understanding.
+            </p>
+            <p class=""> 
+             <h4>Research Interests</h4>
+              <div class="w3-container w3-cursive">
+                <ul class="w3-ul" style="font-weight: 400;">
+                  <li>3D Computer Vision</li>
+                  <li>3D Generation</li>
+                  <li>3D Object and Scene Reconstruction and Analysis</li>
+                  <li>Point Cloud Processing and Learning</li>
+                </ul>
+            <!--</p>-->
+              </div>
+             <h4>Education</h4>
+              <div class="w3-container w3-cursive">
+                <ul class="w3-ul" style="font-weight: 400;">
+                  <li>2017-2021, B.Sc., Computer Science and Technology (Honored Class), Nanjing University</li>
+                  <li>2021-, Ph.D., Computer Science and Technology, Nanjing University</li>
+                </ul>
+            <!--</p>-->
+              </div>
+             <h4>Internship</h4>
+              <div class="w3-container w3-cursive">
+                <ul class="w3-ul" style="font-weight: 400;">
+                  <li>2025.5.22-, Tencent Hunyuan 3D, Shanghai, China, Research Intern (QingYun Top Project)</li>
+                </ul>
+            <!--</p>-->
+              </div>
+          </div>
+
+          <!--RESUME-->
+          <div id="publication" class="w3-container w3-margin-top-10-percent w3-cursive">
+            <h2 class="w3-border-bottom w3-border-amber" style="border-width: 3px !important;">PUBLICATION</h2>
+            <div class="w3-margin-top-2 w3-cursive">
+              <ul class="w3-ul" style="font-weight: 400;">
+                <li> 
+                  <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <p>
+                          <b>(NIPS2022)</b> <b>Chanfeng Ma</b>, Yang Yang, Jie Guo, Fei Pan, Chongjun Wang, Yanwen Guo. <b>Unsupervised Point Cloud Completion and Segmentation by Generative Adversarial Autoencoding Network</b>. <a href="https://nips.cc/virtual/2022/poster/53563">[paper]</a><a href="https://github.com/murcherful/UGAAN">[code]</a>
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+                          More
+                          </a>
+                        </p>
+                      </div>
+                      <div id="collapse1" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <img style="max-width:100%;overflow:hidden;" src="publication_images/nips2022_intro_image.png"/>
+                          <p>
+                            <b>ABSTRACT: </b>
+                            Most existing point cloud completion methods assume the input partial point cloud is clean, which is not practical in practice, and are Most existing point cloud completion methods assume the input partial point cloud is clean, which is not the case in practice, and are generally based on supervised learning. In this paper, we present an unsupervised generative adversarial autoencoding network, named UGAAN, which completes the partial point cloud contaminated by surroundings from real scenes and cutouts the object simultaneously, only using artificial CAD models as assistance. The generator of UGAAN learns to predict the complete point clouds on real data from both the discriminator and the autoencoding process of artificial data. The latent codes from generator are also fed to discriminator which makes encoder only extract object features rather than noises. We also devise a refiner for generating better complete cloud with a segmentation module to separate the object from background. We train our UGAAN with one real scene dataset and evaluate it with the other two. Extensive experiments and visualization demonstrate our superiority, generalization and robustness. Comparisons against the previous method show that our method achieves the state-of-the-art performance on unsupervised point cloud completion and segmentation on real data.           
+                          </p>
+                          <p>
+                            <b>TL;DR: </b>
+                            We propose an unsupervised method for point cloud completion and segmentation. 
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <p>
+                          <b>(CVPR2023)</b> <b>Chanfeng Ma</b>, Yinuo Chen, Pengxiao Guo, Jie Guo, Chongjun Wang, Yanwen Guo. <b>Symmetric Shape-Preserving Autoencoder for Unsupervised Real Scene Point Cloud Completion</b>. <a href="https://ieeexplore.ieee.org/document/10203664">[paper]</a><a href="https://github.com/murcherful/USSPA">[code]</a>
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+                          More
+                          </a>
+                        </p>
+                      </div>
+                      <div id="collapse2" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <img style="max-width:100%;overflow:hidden;" src="publication_images/cvpr2023_intro_image.png"/>
+                          <p>
+                            <b>ABSTRACT: </b>
+                            Unsupervised completion of real scene objects is of vital importance but still remains extremely challenging in preserving input shapes, predicting accurate results, and adapting to multi-category data. To solve these problems, we propose in this paper an Unsupervised Symmetric Shape-Preserving Autoencoding Network, termed USSPA, to predict complete point clouds of objects from real scenes. One of our main observations is that many natural and man-made objects exhibit significant symmetries. To accommodate this, we devise a symmetry learning module to learn from those objects and to preserve structural symmetries. Starting from an initial coarse predictor, our autoencoder refines the complete shape with a carefully designed upsampling refinement module. Besides the discriminative process on the latent space, the discriminators of our USSPA also take predicted point clouds as direct guidance, enabling more detailed shape prediction. Clearly different from previous methods which train each category separately, our USSPA can be adapted to the training of multi-category data in one pass through a classifier-guided discriminator, with consistent performance on single category. For more accurate evaluation, we contribute to the community a real scene dataset with paired CAD models as ground truth. Extensive experiments and comparisons demonstrate our superiority and generalization and show that our method achieves state-of-the-art performance on unsupervised completion of real scene objects.
+                          </p>
+                          <p>
+                            <b>TL;DR: </b>
+                            We propose an unsupervised method and an evaluation method for unsupervised (unpaired) real scene point cloud completion and achieve SOTA performance.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <p>
+                          <b>(TVCG accpeted 2023-10-18)</b> <b>Chanfeng Ma</b>, Yang Yang, Jie Guo, Mingqiang Wei, Chongjun Wang, Yanwen Guo, Wenping Wang. <b>Collaborative Completion and Segmentation for Partial Point Clouds with Outliers</b>. <a href="https://ieeexplore.ieee.org/document/10301508">[paper]</a> <a>[code (coming soon) (email me if you need)]</a>
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+                          More
+                          </a>
+                        </p>
+                      </div>
+                      <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <img style="max-width:100%;overflow:hidden;" src="publication_images/TVCG2023_intro_img.png"/>
+                          <p>
+                            <b>ABSTRACT: </b>
+                            Outliers will inevitably creep into the captured point cloud during 3D scanning, degrading cutting-edge models on various geometric tasks heavily. This paper looks at an intriguing question that whether point cloud completion and segmentation can promote each other to defeat outliers. To answer it, we propose a collaborative completion and segmentation network, termed CS-Net, for partial point clouds with outliers. Unlike most of existing methods, CS-Net does not need any clean (or say outlier-free) point cloud as input or any outlier removal operation. CS-Net is a new learning paradigm that makes completion and segmentation networks work collaboratively. With a cascaded architecture, our method refines the prediction progressively. Specifically, after the segmentation network, a cleaner point cloud is fed into the completion network. We design a novel completion network which harnesses the labels obtained by segmentation together with farthest point sampling to purify the point cloud and leverages KNN-grouping for better generation. Benefited from segmentation, the completion module can utilize the filtered point cloud which is cleaner for completion. Meanwhile, the segmentation module is able to distinguish outliers from target objects more accurately with the help of the clean and complete shape inferred by completion. Besides the designed collaborative mechanism of CS-Net, we establish a benchmark dataset of partial point clouds with outliers. Extensive experiments show clear improvements of our CS-Net over its competitors, in terms of outlier robustness and completion accuracy.
+                          </p>
+                          <p>
+                            <b>TL;DR: </b>
+                            We propose a Collaborative Completion and Segmentation network for point clouds with noises to predict more accurate completion results. 
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <p>
+                          <b>(CVPR2024)</b> Yanwen Guo, Yuanqi Li, Dayong Ren, Xiaohong Zhang, Jiawei Li, Liang Pu, <b>Changfeng Ma</b>, Xiaoyu Zhan, Jie Guo, Mingqiang Wei, Yan Zhang, Piaopiao Yu, Shuangyu Yang, Donghao Ji, Huisheng Ye, Hao Sun, Yansong Liu, Yinuo Chen, Jiaqi Zhu, Hongyu Liu. <b>LiDAR-Net: A Real-scanned 3D Point Cloud Dataset for Indoor Scenes</b>. <a href="https://openaccess.thecvf.com/content/CVPR2024/html/Guo_LiDAR-Net_A_Real-scanned_3D_Point_Cloud_Dataset_for_Indoor_Scenes_CVPR_2024_paper.html">[paper]</a> <a href="http://lidar-net.njumeta.com/">[project]</a>
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+                          More
+                          </a>
+                        </p>
+                      </div>
+                      <div id="collapse4" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <img style="max-width:100%;overflow:hidden;" src="publication_images/CVPR2024_intro_img.jpg"/>
+                          <p>
+                            <b>ABSTRACT: </b>
+                            In this paper we present LiDAR-Net a new real-scanned indoor point cloud dataset containing nearly 3.6 billion precisely point-level annotated points covering an expansive area of 30000m^2. It encompasses three prevalent daily environments including learning scenes working scenes and living scenes. LiDAR-Net is characterized by its non-uniform point distribution e.g. scanning holes and scanning lines. Additionally it meticulously records and annotates scanning anomalies including reflection noise and ghost. These anomalies stem from specular reflections on glass or metal as well as distortions due to moving persons. LiDAR-Net's realistic representation of non-uniform distribution and anomalies significantly enhances the training of deep learning models leading to improved generalization in practical applications. We thoroughly evaluate the performance of state-of-the-art algorithms on LiDAR-Net and provide a detailed analysis of the results. Crucially our research identifies several fundamental challenges in understanding indoor point clouds contributing essential insights to future explorations in this field. Our dataset can be found online: http://lidar-net.njumeta.com
+                          </p>
+                          <p>
+                            <b>TL;DR: </b>
+                            We present a new large-scale real-scanned indoor point cloud dataset with LiDAR point cloud scanner, containing different data distribution and more challenging tasks.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <p>
+                          <b>(CVPR2025)</b> <b>Changfeng Ma</b>, Ran Bi, Jie Guo, Chongjun Wang, Yanwen Guo. <b>Sparse Point Cloud Patches Rendering via Splitting 2D Gaussians</b>. <a href="https://arxiv.org/abs/2505.09413">[paper]</a> <a href="https://github.com/murcherful/GauPCRender">[code]</a>
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+                          More
+                          </a>
+                        </p>
+                      </div>
+                      <div id="collapse5" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <img style="max-width:100%;overflow:hidden;" src="publication_images/CVPR2025_intro_img.png"/>
+                          <p>
+                            <b>ABSTRACT: </b>
+                            Current learning-based methods predict NeRF or 3D Gaussians from point clouds to achieve photo-realistic rendering but still depend on categorical priors, dense point clouds, or additional refinements. Hence, we introduce a novel point cloud rendering method by predicting 2D Gaussians from point clouds. Our method incorporates two identical modules with an entire-patch architecture enabling the network to be generalized to multiple datasets. The module normalizes and initializes the Gaussians utilizing the point cloud information including normals, colors and distances. Then, splitting decoders are employed to refine the initial Gaussians by duplicating them and predicting more accurate results, making our methodology effectively accommodate sparse point clouds as well. Once trained, our approach exhibits direct generalization to point clouds across different categories. The predicted Gaussians are employed directly for rendering without additional refinement on the rendered images, retaining the benefits of 2D Gaussians. We conduct extensive experiments on various datasets, and the results demonstrate the superiority and generalization of our method, which achieves SOTA performance.
+                          </p>
+                          <p>
+                            <b>TL;DR: </b>
+                            We propose a novel point cloud rendering method by predicting 2D Gaussians from point clouds.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <p>
+                          <b>(TVCG accpeted 2025-6-27)</b> <b>Changfeng Ma</b>, Pengxiao Guo, Shuangyu Yang, Yinuo Chen, Jie Guo, Chongjun Wang, Yanwen Guo, Wenping Wang. <b>Parameterize Structure With Differentiable Template for 3D Shape Generation</b>. <a href="https://ieeexplore.ieee.org/document/11054302">[paper]</a> <a>[code (coming soon) (email me if you need)]</a>
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+                          More
+                          </a>
+                        </p>
+                      </div>
+                      <div id="collapse6" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <img style="max-width:100%;overflow:hidden;" src="publication_images/TVCG2025_intro_img.jpeg"/>
+                          <p>
+                            <b>ABSTRACT: </b>
+                            Structural representation is crucial for reconstructing and generating editable 3D shapes with part semantics. Recent 3D shape generation works employ complicated networks and structure definitions relying on hierarchical annotations and pay less attention to the details inside parts. In this paper, we propose the method that parameterizes the shared structure in the same category using a differentiable template and corresponding fixed-length parameters. Specific parameters are fed into the template to calculate cuboids that indicate a concrete shape. We utilize the boundaries of three-view renderings of each cuboid to further describe the inside details. Shapes are represented with the parameters and three-view details inside cuboids, from which the SDF can be calculated to recover the object. Benefiting from our fixed-length parameters and three-view details, our networks for reconstruction and generation are simple and effective to learn the latent space. Our method can reconstruct or generate diverse shapes with complicated details, and interpolate them smoothly. Extensive evaluations demonstrate the superiority of our method on reconstruction from point cloud, generation, and interpolation.
+                          </p>
+                          <p>
+                            <b>TL;DR: </b>
+                            We propose a novel method that parameterizes the shared structure in the same category using a differentiable template achieving reconstruction, generation and editing.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <p>
+                          <b>(Arxiv)</b> <b>Changfeng Ma</b>, Yang Li, Xinhao Yan, Jiachen Xu, Chunshi Wang, Zibo Zhao, Yanwen Guo, Zhuo Chen, Chunchao Guo. <b>P3-SAM: Native 3D Part Segmentation</b>. <a href="https://arxiv.org/abs/2509.06784">[paper]</a> <a>[code (coming soon)]</a> <a>[Project]</a>
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">
+                          More
+                          </a>
+                        </p>
+                      </div>
+                      <div id="collapse7" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <img style="max-width:100%;overflow:hidden;" src="publication_images/P3-SAM.jpg"/>
+                          <p>
+                            <b>ABSTRACT: </b>
+                            Segmenting 3D assets into their constituent parts is crucial for enhancing 3D understanding, facilitating model reuse, and supporting various applications such as part generation. However, current methods face limitations such as poor robustness when dealing with complex objects and cannot fully automate the process. In this paper, we propose a native 3D point-promptable part segmentation model termed P3-SAM, designed to fully automate the segmentation of any 3D objects into components. Inspired by SAM, P3-SAM consists of a feature extractor, multiple segmentation heads, and an IoU predictor, enabling interactive segmentation for users. We also propose an algorithm to automatically select and merge masks predicted by our model for part instance segmentation. Our model is trained on a newly built dataset containing nearly 3.7 million models with reasonable segmentation labels. Comparisons show that our method achieves precise segmentation results and strong robustness on any complex objects, attaining state-of-the-art performance. Our code will be released soon.
+                          </p>
+                          <p>
+                            <b>TL;DR: </b>
+                            Segment any 3D objects. SAM for 3D objects.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+                <li>
+                  <div class="panel-group" id="accordion">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <p>
+                          <b>(Arxiv)</b> Xinhao Yan*, Jiachen Xu*, Yang Li, <b>Changfeng Ma</b>, Yunhan Yang, Chunshi Wang, Zibo Zhao, Zeqiang Lai, Yunfei Zhao, Zhuo Chen, Chunchao Guo. <b>X-Part: high fidelity and structure coherent shape decomposition</b>. <a href="https://arxiv.org/abs/2509.08643">[paper]</a> <a>[code (coming soon)]</a> <a>[Project]</a>
+                          <a data-toggle="collapse" data-parent="#accordion" href="#collapse8">
+                          More
+                          </a>
+                        </p>
+                      </div>
+                      <div id="collapse8" class="panel-collapse collapse">
+                        <div class="panel-body">
+                          <img style="max-width:100%;overflow:hidden;" src="publication_images/x-part.jpg"/>
+                          <p>
+                            <b>ABSTRACT: </b>
+                            Generating 3D shapes at part level is pivotal for downstream applications such as mesh retopology, UV mapping, and 3D printing. However, existing part-based generation methods often lack sufficient controllability and suffer from poor semantically meaningful decomposition. To this end, we introduce X-Part, a controllable generative model designed to decompose a holistic 3D object into semantically meaningful and structurally coherent parts with high geometric fidelity. X-Part exploits the bounding box as prompts for the part generation and injects point-wise semantic features for meaningful decomposition. Furthermore, we design an editable pipeline for interactive part generation. Extensive experimental results show that X-Part achieves state-of-the-art performance in part-level shape generation. This work establishes a new paradigm for creating production-ready, editable, and structurally sound 3D assets. Codes will be released for public research.
+                          </p>
+                          <p>
+                            <b>TL;DR: </b>
+                            SOTA Part Generation. 
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!--CONTACT SECTION-->
+          <div id="contact" class="w3-container w3-margin-top-10-percent w3-cursive">
+            <h2 class="w3-border-bottom w3-border-amber" style="border-width: 3px !important;">CONTACT</h2>
+            <div class="w3-margin-top-2" style="font-weight: 500;">
+              <p>Name: Changfeng Ma</p>
+              <p>E-mail: <b>changfengma@smail.nju.edu.cn</b>, njumcf@126.com</p>
+              <p>Github: <a href="https://github.com/murcherful">murcherful</a></p>
+              <p>If you can't get access to the pdf, please email me.</p>
+            </div>
+          </div>
+
+        <!--FOOTER-->
+        <!-- Footer. This section contains an ad for W3Schools Spaces. You can leave it to support us. -->
+        <footer class="w3-container w3-border-top w3-center w3-margin-top-4">
+          <p>© 2023 - Changfeng Ma</p>
+           <p class="w3-small">This website was made with <a href="https://www.w3schools.com/spaces">W3schools</a> Spaces. Update time: 2023.03.30</p>
+          <!--<a class="w3-button w3-round-xxlarge w3-small w3-light-grey" href="https://www.w3schools.com/spaces" target="_blank">Start now</a> -->
+        <!-- End footer -->
+        </footer>
+
+        <!--END OF CV SECTION-->
+      </section>      
+    </section>
+    <script>
+      // Function to toggle mobile navigation
+      function toggleNavigation() {
+        let nav = document.getElementById("mobile-nav");
+        if (nav.classList.contains('w3-show')) {
+          nav.classList.remove('w3-show');
+        } else { 
+          nav.classList.add('w3-show');
+        }
+      }
+    </script>
+    <script>
+      // Script to load feather icons
+      feather.replace()
+    </script>
+  </body>
+</html>
