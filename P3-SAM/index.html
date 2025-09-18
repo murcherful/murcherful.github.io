@@ -1,0 +1,423 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>P3-SAM: Native 3D Part Segmentation</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+			<div id="wrapper" class="fade-in">
+
+				<!-- Intro -->
+					<div id="intro">
+						<h1>P3-SAM:<br />Native 3D Part Segmentation</h1>
+						<p><a href="https://murcherful.github.io/">Changfeng Ma</a><sup>1,2</sup>, Yang Li<sup>1</sup>, Xinhao Yan<sup>1,3</sup>, Jiachen Xu<sup>1</sup>, Yunhan Yang<sup>1,4</sup>, Chunshi Wang<sup>1,5</sup>, Zibo Zhao<sup>1</sup>, Yanwen Guo<sup>2</sup>, Zhuo Chen<sup>1</sup>, Chunchao Guo<sup>1</sup></p>
+						<p><sup>1</sup>Tencent Hunyuan, <sup>2</sup>NJU, <sup>3</sup>ShanghaiTech, <sup>4</sup>HKU, <sup>5</sup>ZJU </p>
+						<p>	<a href="https://arxiv.org/abs/2509.06784"><img src="https://img.shields.io/badge/arXiv-2509.06784-red"/></a> 
+						   	<a><img src="https://img.shields.io/badge/GitHub-TBD-green"/></a>
+							<a><img src="https://img.shields.io/badge/Hunyuan3D-Studio-yellow"/></a>
+							<a href="https://3d.hunyuan.tencent.com/"><img src="https://img.shields.io/badge/Hunyuan3D-blue"/></a>
+						</p>
+						<ul class="actions">
+							<li><a href="#header" class="button icon solid solo fa-arrow-down scrolly">Continue</a></li>
+						</ul>
+					</div>
+
+				<!-- Header -->
+					<header id="header">
+						<a href="index.html" class="logo">P3-SAM</a>
+					</header>
+
+				<!-- Nav -->
+					<!-- <nav id="nav">
+						<ul class="links">
+							<li class="active"><a href="index.html">This is Massively</a></li>
+							<li><a href="generic.html">Generic Page</a></li>
+							<li><a href="elements.html">Elements Reference</a></li>
+						</ul>
+						<ul class="icons">
+							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+						</ul>
+					</nav> -->
+
+				<!-- Main -->
+					<div id="main">
+
+						<!-- Featured Post -->
+							<article class="post featured">
+								<header class="major">
+									<span class="date">ABSTRACT</span>
+								</header>
+								<p>
+								Segmenting 3D assets into their constituent parts is crucial for enhancing 3D understanding, facilitating model reuse, and supporting various applications such as part generation. However, current methods face limitations such as poor robustness when dealing with complex objects and cannot fully automate the process. In this paper, we propose a native 3D point-promptable part segmentation model termed P3-SAM, designed to fully automate the segmentation of any 3D objects into components. Inspired by SAM, P3-SAM consists of a feature extractor, multiple segmentation heads, and an IoU predictor, enabling interactive segmentation for users. We also propose an algorithm to automatically select and merge masks predicted by our model for part instance segmentation. Our model is trained on a newly built dataset containing nearly 3.7 million models with reasonable segmentation labels. Comparisons show that our method achieves precise segmentation results and strong robustness on any complex objects, attaining state-of-the-art performance. Our code will be released soon.
+								</p>
+								<a class="image main"><img src="images/teaser.jpg" alt="" /></a>
+								<p>Our P3-SAM produces precise part segmentation results for any object.</p>
+							</article>
+							<article class="post featured">
+								<header class="major">
+									<span class="date">METHOD</span>
+								</header>
+								<a href="#" class="image main"><img src="images/method.jpg" alt="" /></a>
+								<p>
+								<b>Network Architecture of P3-SAM:</b>
+								Input point clouds are fed to feature extractor to obtain point-wise features. The features, point prompts, and original point clouds are then fed to a two stage multi-mask segmentor to obtain three masks in various scales. Finally, the IoU predictor is utilized to evaluate the quality of the masks and select the best one as the final prediction.
+								</p>
+								<a href="#" class="image main"><img src="images/auto_seg.jpg" alt="" /></a>
+								<p>
+								<b>Automatic Segmentation Pipeline:</b>
+								Point prompts are sampled by FPS and go through the P3-SAM to obtain multiple masks. NMS is then adopted to merge redundant masks. The point-level masks are then projected onto mesh faces to obtain the part segmentation results.
+								</p>
+							</article>
+							<article class="post featured">
+								<header class="major">
+									<span class="date">Results</span>
+								</header>
+								<model-viewer src="../../assets/ShopifyModels/Chair.glb" poster="../../assets/ShopifyModels/Chair.webp" shadow-intensity="1" ar camera-controls touch-action="pan-y" alt="A 3D model carousel">
+  
+									<button slot="ar-button" id="ar-button">
+										View in your space
+									</button>
+
+									<div id="ar-prompt">
+										<img src="../../assets/hand.png">
+									</div>
+
+									<button id="ar-failure">
+										AR is not tracking!
+									</button>
+
+									<div class="slider">
+										<div class="slides">
+										<button class="slide selected" onclick="switchSrc(this, 'Chair')" style="background-image: url('../../assets/ShopifyModels/Chair.webp');">
+
+										</button><button class="slide" onclick="switchSrc(this, 'Mixer')" style="background-image: url('../../assets/ShopifyModels/Mixer.webp');">
+
+										</button><button class="slide" onclick="switchSrc(this, 'GeoPlanter')" style="background-image: url('../../assets/ShopifyModels/GeoPlanter.webp');">
+										
+										</button><button class="slide" onclick="switchSrc(this, 'ToyTrain')" style="background-image: url('../../assets/ShopifyModels/ToyTrain.webp');">
+										
+										</button><button class="slide" onclick="switchSrc(this, 'Canoe')" style="background-image: url('../../assets/ShopifyModels/Canoe.webp');">    
+										</button></div>
+									</div>
+									</model-viewer>
+
+									<script type="module">
+									const modelViewer = document.querySelector("model-viewer");
+
+									window.switchSrc = (element, name) => {
+										const base = "../../assets/ShopifyModels/" + name;
+										modelViewer.src = base + '.glb';
+										modelViewer.poster = base + '.webp';
+										const slides = document.querySelectorAll(".slide");
+										slides.forEach((element) => {element.classList.remove("selected");});
+										element.classList.add("selected");
+									};
+
+									document.querySelector(".slider").addEventListener('beforexrselect', (ev) => {
+										// Keep slider interactions from affecting the XR scene.
+										ev.preventDefault();
+									});
+									</script>
+
+									<style>
+									/* This keeps child nodes hidden while the element loads */
+									:not(:defined) > * {
+										display: none;
+									}
+
+									model-viewer {
+										background-color: #eee;
+										overflow-x: hidden;
+									}
+
+									#ar-button {
+										background-image: url(../../assets/ic_view_in_ar_new_googblue_48dp.png);
+										background-repeat: no-repeat;
+										background-size: 20px 20px;
+										background-position: 12px 50%;
+										background-color: #fff;
+										position: absolute;
+										left: 50%;
+										transform: translateX(-50%);
+										white-space: nowrap;
+										bottom: 132px;
+										padding: 0px 16px 0px 40px;
+										font-family: Roboto Regular, Helvetica Neue, sans-serif;
+										font-size: 14px;
+										color:#4285f4;
+										height: 36px;
+										line-height: 36px;
+										border-radius: 18px;
+										border: 1px solid #DADCE0;
+									}
+
+									#ar-button:active {
+										background-color: #E8EAED;
+									}
+
+									#ar-button:focus {
+										outline: none;
+									}
+
+									#ar-button:focus-visible {
+										outline: 1px solid #4285f4;
+									}
+
+									@keyframes circle {
+										from { transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg); }
+										to   { transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg); }
+									}
+
+									@keyframes elongate {
+										from { transform: translateX(100px); }
+										to   { transform: translateX(-100px); }
+									}
+
+									model-viewer > #ar-prompt {
+										position: absolute;
+										left: 50%;
+										bottom: 175px;
+										animation: elongate 2s infinite ease-in-out alternate;
+										display: none;
+									}
+
+									model-viewer[ar-status="session-started"] > #ar-prompt {
+										display: block;
+									}
+
+									model-viewer > #ar-prompt > img {
+										animation: circle 4s linear infinite;
+									}
+
+									model-viewer > #ar-failure {
+										position: absolute;
+										left: 50%;
+										transform: translateX(-50%);
+										bottom: 175px;
+										display: none;
+									}
+
+									model-viewer[ar-tracking="not-tracking"] > #ar-failure {
+										display: block;
+									}
+
+									.slider {
+										width: 100%;
+										text-align: center;
+										overflow: hidden;
+										position: absolute;
+										bottom: 16px;
+									}
+
+									.slides {
+										display: flex;
+										overflow-x: auto;
+										scroll-snap-type: x mandatory;
+										scroll-behavior: smooth;
+										-webkit-overflow-scrolling: touch;
+									}
+
+									.slide {
+										scroll-snap-align: start;
+										flex-shrink: 0;
+										width: 100px;
+										height: 100px;
+										background-size: contain;
+										background-repeat: no-repeat;
+										background-position: center;
+										background-color: #fff;
+										margin-right: 10px;
+										border-radius: 10px;
+										border: none;
+										display: flex;
+									}
+
+									.slide.selected {
+										border: 2px solid #4285f4;
+									}
+
+									.slide:focus {
+										outline: none;
+									}
+
+									.slide:focus-visible {
+										outline: 1px solid #4285f4;
+									}
+
+									</style>
+							</article>
+
+
+						<!-- Posts -->
+							<section class="posts">
+								<article>
+									<header>
+										<span class="date">April 24, 2017</span>
+										<h2><a href="#">Sed magna<br />
+										ipsum faucibus</a></h2>
+									</header>
+									<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
+									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Full Story</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<span class="date">April 22, 2017</span>
+										<h2><a href="#">Primis eget<br />
+										imperdiet lorem</a></h2>
+									</header>
+									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
+									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Full Story</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<span class="date">April 18, 2017</span>
+										<h2><a href="#">Ante mattis<br />
+										interdum dolor</a></h2>
+									</header>
+									<a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
+									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Full Story</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<span class="date">April 14, 2017</span>
+										<h2><a href="#">Tempus sed<br />
+										nulla imperdiet</a></h2>
+									</header>
+									<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
+									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Full Story</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<span class="date">April 11, 2017</span>
+										<h2><a href="#">Odio magna<br />
+										sed consectetur</a></h2>
+									</header>
+									<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
+									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Full Story</a></li>
+									</ul>
+								</article>
+								<article>
+									<header>
+										<span class="date">April 7, 2017</span>
+										<h2><a href="#">Augue lorem<br />
+										primis vestibulum</a></h2>
+									</header>
+									<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
+									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
+									<ul class="actions special">
+										<li><a href="#" class="button">Full Story</a></li>
+									</ul>
+								</article>
+							</section>
+
+						<!-- Footer -->
+							<footer>
+								<div class="pagination">
+									<!--<a href="#" class="previous">Prev</a>-->
+									<a href="#" class="page active">1</a>
+									<a href="#" class="page">2</a>
+									<a href="#" class="page">3</a>
+									<span class="extra">&hellip;</span>
+									<a href="#" class="page">8</a>
+									<a href="#" class="page">9</a>
+									<a href="#" class="page">10</a>
+									<a href="#" class="next">Next</a>
+								</div>
+							</footer>
+
+					</div>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<section>
+							<form method="post" action="#">
+								<div class="fields">
+									<div class="field">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" />
+									</div>
+									<div class="field">
+										<label for="email">Email</label>
+										<input type="text" name="email" id="email" />
+									</div>
+									<div class="field">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" rows="3"></textarea>
+									</div>
+								</div>
+								<ul class="actions">
+									<li><input type="submit" value="Send Message" /></li>
+								</ul>
+							</form>
+						</section>
+						<section class="split contact">
+							<section class="alt">
+								<h3>Address</h3>
+								<p>1234 Somewhere Road #87257<br />
+								Nashville, TN 00000-0000</p>
+							</section>
+							<section>
+								<h3>Phone</h3>
+								<p><a href="#">(000) 000-0000</a></p>
+							</section>
+							<section>
+								<h3>Email</h3>
+								<p><a href="#">info@untitled.tld</a></p>
+							</section>
+							<section>
+								<h3>Social</h3>
+								<ul class="icons alt">
+									<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
+								</ul>
+							</section>
+						</section>
+					</footer>
+
+				<!-- Copyright -->
+					<div id="copyright">
+						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+					</div>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
