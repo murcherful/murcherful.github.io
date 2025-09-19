@@ -5,6 +5,158 @@
 	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
 -->
 <html>
+	<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+	<script type="module">
+	window.switchSrc = (element, base, name, viewer_id, slides_id) => {
+		const modelViewer = document.querySelector(`#${viewer_id}`);
+		base = base + name;
+		modelViewer.src = base + '.glb';
+		modelViewer.poster = base + '.jpg';
+		const slides = document.querySelector(`#${slides_id}`).querySelectorAll(".slide");
+		slides.forEach((element) => {element.classList.remove("selected");});
+		element.classList.add("selected");
+	};
+
+	document.querySelector(".slider").addEventListener('beforexrselect', (ev) => {
+		// Keep slider interactions from affecting the XR scene.
+		ev.preventDefault();
+	});
+	</script>
+
+	<style>
+	/* This keeps child nodes hidden while the element loads */
+	:not(:defined) > * {
+		display: none;
+	}
+
+	model-viewer {
+		background-color: #eee;
+		overflow-x: hidden;
+	}
+
+	#ar-button {
+		background-image: url(../../assets/ic_view_in_ar_new_googblue_48dp.png);
+		background-repeat: no-repeat;
+		background-size: 20px 20px;
+		background-position: 12px 50%;
+		background-color: #fff;
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		white-space: nowrap;
+		bottom: 132px;
+		padding: 0px 16px 0px 40px;
+		font-family: Roboto Regular, Helvetica Neue, sans-serif;
+		font-size: 14px;
+		color:#4285f4;
+		height: 36px;
+		line-height: 36px;
+		border-radius: 18px;
+		border: 1px solid #DADCE0;
+	}
+
+	#ar-button:active {
+		background-color: #E8EAED;
+	}
+
+	#ar-button:focus {
+		outline: none;
+	}
+
+	#ar-button:focus-visible {
+		outline: 1px solid #4285f4;
+	}
+
+	@keyframes circle {
+		from { transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg); }
+		to   { transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg); }
+	}
+
+	@keyframes elongate {
+		from { transform: translateX(100px); }
+		to   { transform: translateX(-100px); }
+	}
+
+	model-viewer > #ar-prompt {
+		position: absolute;
+		left: 50%;
+		bottom: 175px;
+		animation: elongate 2s infinite ease-in-out alternate;
+		display: none;
+	}
+
+	model-viewer[ar-status="session-started"] > #ar-prompt {
+		display: block;
+	}
+
+	model-viewer > #ar-prompt > img {
+		animation: circle 4s linear infinite;
+	}
+
+	model-viewer > #ar-failure {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: 175px;
+		display: none;
+	}
+
+	model-viewer[ar-tracking="not-tracking"] > #ar-failure {
+		display: block;
+	}
+
+	.slider {
+		width: 100%;
+		text-align: center;
+		overflow: hidden;
+		position: absolute;
+		bottom: 16px;
+	}
+
+	.slides {
+		display: flex;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.slide {
+		scroll-snap-align: start;
+		flex-shrink: 0;
+		width: 100px;
+		height: 100px;
+		background-size: contain;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-color: #fff;
+		margin-right: 10px;
+		border-radius: 10px;
+		border: none;
+		display: flex;
+	}
+
+	.slide.selected {
+		border: 2px solid #4285f4;
+	}
+
+	.slide:focus {
+		outline: none;
+	}
+
+	.slide:focus-visible {
+		outline: 1px solid #4285f4;
+	}
+
+	.code-block {
+		display: block;
+		text-align: left;
+		white-space: pre;
+		margin: 0;
+		padding: 0;
+	}
+
+	</style>
 	<head>
 		<title>P3-SAM: Native 3D Part Segmentation</title>
 		<meta charset="utf-8" />
@@ -37,45 +189,29 @@
 						<a href="index.html" class="logo">P3-SAM</a>
 					</header>
 
-				<!-- Nav -->
-					<!-- <nav id="nav">
-						<ul class="links">
-							<li class="active"><a href="index.html">This is Massively</a></li>
-							<li><a href="generic.html">Generic Page</a></li>
-							<li><a href="elements.html">Elements Reference</a></li>
-						</ul>
-						<ul class="icons">
-							<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-							<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
-							<li><a href="#" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-						</ul>
-					</nav> -->
-
 				<!-- Main -->
 					<div id="main">
 
 						<!-- Featured Post -->
 							<article class="post featured">
 								<header class="major">
-									<span class="date">ABSTRACT</span>
+									<span class="date"><b>ABSTRACT</b></span>
 								</header>
 								<p>
 								Segmenting 3D assets into their constituent parts is crucial for enhancing 3D understanding, facilitating model reuse, and supporting various applications such as part generation. However, current methods face limitations such as poor robustness when dealing with complex objects and cannot fully automate the process. In this paper, we propose a native 3D point-promptable part segmentation model termed P3-SAM, designed to fully automate the segmentation of any 3D objects into components. Inspired by SAM, P3-SAM consists of a feature extractor, multiple segmentation heads, and an IoU predictor, enabling interactive segmentation for users. We also propose an algorithm to automatically select and merge masks predicted by our model for part instance segmentation. Our model is trained on a newly built dataset containing nearly 3.7 million models with reasonable segmentation labels. Comparisons show that our method achieves precise segmentation results and strong robustness on any complex objects, attaining state-of-the-art performance. Our code will be released soon.
 								</p>
 								<a class="image main"><img src="images/teaser.jpg" alt="" /></a>
-								<p>Our P3-SAM produces precise part segmentation results for any object.</p>
 							</article>
 							<article class="post featured">
 								<header class="major">
-									<span class="date">METHOD</span>
+									<span class="date"><b>METHOD</b></span>
 								</header>
-								<a href="#" class="image main"><img src="images/method.jpg" alt="" /></a>
+								<a class="image main"><img src="images/method.jpg" alt="" /></a>
 								<p>
 								<b>Network Architecture of P3-SAM:</b>
 								Input point clouds are fed to feature extractor to obtain point-wise features. The features, point prompts, and original point clouds are then fed to a two stage multi-mask segmentor to obtain three masks in various scales. Finally, the IoU predictor is utilized to evaluate the quality of the masks and select the best one as the final prediction.
 								</p>
-								<a href="#" class="image main"><img src="images/auto_seg.jpg" alt="" /></a>
+								<a class="image main"><img src="images/auto_seg.jpg" alt="" /></a>
 								<p>
 								<b>Automatic Segmentation Pipeline:</b>
 								Point prompts are sampled by FPS and go through the P3-SAM to obtain multiple masks. NMS is then adopted to merge redundant masks. The point-level masks are then projected onto mesh faces to obtain the part segmentation results.
@@ -83,331 +219,124 @@
 							</article>
 							<article class="post featured">
 								<header class="major">
-									<span class="date">Results</span>
+									<span class="date"><b>RESULTS</b></span>
 								</header>
-								<model-viewer src="../../assets/ShopifyModels/Chair.glb" poster="../../assets/ShopifyModels/Chair.webp" shadow-intensity="1" ar camera-controls touch-action="pan-y" alt="A 3D model carousel">
-  
-									<button slot="ar-button" id="ar-button">
-										View in your space
-									</button>
-
-									<div id="ar-prompt">
-										<img src="../../assets/hand.png">
-									</div>
-
-									<button id="ar-failure">
-										AR is not tracking!
-									</button>
-
-									<div class="slider">
-										<div class="slides">
-										<button class="slide selected" onclick="switchSrc(this, 'Chair')" style="background-image: url('../../assets/ShopifyModels/Chair.webp');">
-
-										</button><button class="slide" onclick="switchSrc(this, 'Mixer')" style="background-image: url('../../assets/ShopifyModels/Mixer.webp');">
-
-										</button><button class="slide" onclick="switchSrc(this, 'GeoPlanter')" style="background-image: url('../../assets/ShopifyModels/GeoPlanter.webp');">
-										
-										</button><button class="slide" onclick="switchSrc(this, 'ToyTrain')" style="background-image: url('../../assets/ShopifyModels/ToyTrain.webp');">
-										
-										</button><button class="slide" onclick="switchSrc(this, 'Canoe')" style="background-image: url('../../assets/ShopifyModels/Canoe.webp');">    
-										</button></div>
-									</div>
+								<header class="major">
+									<p>Our Segmentation Results on PartObj-Tiny</p>
+									<model-viewer id="objtiny-view" style=" margin: auto; width: 80%; height: 1000px;" src="res/nwt/9.glb" poster="res/nwt/9.jpg" shadow-intensity="1" ar camera-controls auto-rotate touch-action="pan-y" alt="A 3D model carousel">
+										<div class="slider">
+											<div class="slides" id="objtiny-slides">>
+											<button class="slide selected" onclick="switchSrc(this, 'res/nwt/', '9' , 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/9.jpg' );"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '1' , 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/1.jpg' );"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '2' , 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/2.jpg' );"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '3' , 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/3.jpg' );"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '4' , 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/4.jpg' );"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '5' , 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/5.jpg' );"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '6' , 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/6.jpg' );"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '7' , 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/7.jpg' );"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '8' , 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/8.jpg' );"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '10', 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/10.jpg');"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '11', 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/11.jpg');"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '12', 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/12.jpg');"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '13', 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/13.jpg');"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '14', 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/14.jpg');"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '15', 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/15.jpg');"></button>
+											<button class="slide"		   onclick="switchSrc(this, 'res/nwt/', '16', 'objtiny-view', 'objtiny-slides')" style="background-image: url('res/nwt/16.jpg');"></button>
+											</div>
+										</div>
 									</model-viewer>
-
-									<script type="module">
-									const modelViewer = document.querySelector("model-viewer");
-
-									window.switchSrc = (element, name) => {
-										const base = "../../assets/ShopifyModels/" + name;
-										modelViewer.src = base + '.glb';
-										modelViewer.poster = base + '.webp';
-										const slides = document.querySelectorAll(".slide");
-										slides.forEach((element) => {element.classList.remove("selected");});
-										element.classList.add("selected");
-									};
-
-									document.querySelector(".slider").addEventListener('beforexrselect', (ev) => {
-										// Keep slider interactions from affecting the XR scene.
-										ev.preventDefault();
-									});
-									</script>
-
-									<style>
-									/* This keeps child nodes hidden while the element loads */
-									:not(:defined) > * {
-										display: none;
-									}
-
-									model-viewer {
-										background-color: #eee;
-										overflow-x: hidden;
-									}
-
-									#ar-button {
-										background-image: url(../../assets/ic_view_in_ar_new_googblue_48dp.png);
-										background-repeat: no-repeat;
-										background-size: 20px 20px;
-										background-position: 12px 50%;
-										background-color: #fff;
-										position: absolute;
-										left: 50%;
-										transform: translateX(-50%);
-										white-space: nowrap;
-										bottom: 132px;
-										padding: 0px 16px 0px 40px;
-										font-family: Roboto Regular, Helvetica Neue, sans-serif;
-										font-size: 14px;
-										color:#4285f4;
-										height: 36px;
-										line-height: 36px;
-										border-radius: 18px;
-										border: 1px solid #DADCE0;
-									}
-
-									#ar-button:active {
-										background-color: #E8EAED;
-									}
-
-									#ar-button:focus {
-										outline: none;
-									}
-
-									#ar-button:focus-visible {
-										outline: 1px solid #4285f4;
-									}
-
-									@keyframes circle {
-										from { transform: translateX(-50%) rotate(0deg) translateX(50px) rotate(0deg); }
-										to   { transform: translateX(-50%) rotate(360deg) translateX(50px) rotate(-360deg); }
-									}
-
-									@keyframes elongate {
-										from { transform: translateX(100px); }
-										to   { transform: translateX(-100px); }
-									}
-
-									model-viewer > #ar-prompt {
-										position: absolute;
-										left: 50%;
-										bottom: 175px;
-										animation: elongate 2s infinite ease-in-out alternate;
-										display: none;
-									}
-
-									model-viewer[ar-status="session-started"] > #ar-prompt {
-										display: block;
-									}
-
-									model-viewer > #ar-prompt > img {
-										animation: circle 4s linear infinite;
-									}
-
-									model-viewer > #ar-failure {
-										position: absolute;
-										left: 50%;
-										transform: translateX(-50%);
-										bottom: 175px;
-										display: none;
-									}
-
-									model-viewer[ar-tracking="not-tracking"] > #ar-failure {
-										display: block;
-									}
-
-									.slider {
-										width: 100%;
-										text-align: center;
-										overflow: hidden;
-										position: absolute;
-										bottom: 16px;
-									}
-
-									.slides {
-										display: flex;
-										overflow-x: auto;
-										scroll-snap-type: x mandatory;
-										scroll-behavior: smooth;
-										-webkit-overflow-scrolling: touch;
-									}
-
-									.slide {
-										scroll-snap-align: start;
-										flex-shrink: 0;
-										width: 100px;
-										height: 100px;
-										background-size: contain;
-										background-repeat: no-repeat;
-										background-position: center;
-										background-color: #fff;
-										margin-right: 10px;
-										border-radius: 10px;
-										border: none;
-										display: flex;
-									}
-
-									.slide.selected {
-										border: 2px solid #4285f4;
-									}
-
-									.slide:focus {
-										outline: none;
-									}
-
-									.slide:focus-visible {
-										outline: 1px solid #4285f4;
-									}
-
-									</style>
+								</header>
+								<header class="major">
+									<p>Our Segmentation Results on PartObj-Tiny-WT</p>
+									<model-viewer id="objtiny-wt-view" style=" margin: auto; width: 80%; height: 1000px;" src="res/wt/11.glb" poster="res/wt/11.jpg" shadow-intensity="1" ar camera-controls auto-rotate touch-action="pan-y" alt="A 3D model carousel">
+										<div class="slider">
+											<div class="slides" id="objtiny-wt-slides">
+											<button class="slide selected" onclick="switchSrc(this, 'res/wt/', '11', 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/11.jpg');"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '1' , 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/1.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '2' , 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/2.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '3' , 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/3.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '4' , 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/4.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '5' , 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/5.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '6' , 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/6.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '7' , 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/7.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '8' , 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/8.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '9' , 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/9.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '10', 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/10.jpg');"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '12', 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/12.jpg');"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '13', 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/13.jpg');"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '14', 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/14.jpg');"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '15', 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/15.jpg');"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/wt/', '16', 'objtiny-wt-view', 'objtiny-wt-slides')" style="background-image: url('res/wt/16.jpg');"></button>
+											</div>
+										</div>
+									</model-viewer>
+								</header>
+								<header class="major">
+									<p>Our Segmentation Results on AI Generated Models</p>
+									<model-viewer id="ai-gen-view" style=" margin: auto; width: 80%; height: 1000px;" src="res/aigen/14.glb" poster="res/aigen/14.jpg" shadow-intensity="1" ar camera-controls auto-rotate touch-action="pan-y" alt="A 3D model carousel">
+										<div class="slider">
+											<div class="slides" id="ai-gen-slides">
+											<button class="slide selected" onclick="switchSrc(this, 'res/aigen/', '14', 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/14.jpg');"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '1' , 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/1.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '2' , 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/2.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '3' , 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/3.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '4' , 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/4.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '5' , 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/5.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '6' , 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/6.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '7' , 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/7.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '8' , 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/8.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '9' , 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/9.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '10', 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/10.jpg');"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '12', 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/12.jpg');"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '11', 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/11.jpg');"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '13', 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/13.jpg');"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '15', 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/15.jpg');"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/aigen/', '16', 'ai-gen-view', 'ai-gen-slides')" style="background-image: url('res/aigen/16.jpg');"></button>
+											</div>
+										</div>
+									</model-viewer>
+								</header>
+								<header class="major">
+									<p>Our Hierarchical Segmentation Results</p>
+									<model-viewer id="hs-view" style=" margin: auto; width: 80%; height: 1000px;" src="res/hs/1.glb" poster="res/hs/1.jpg" shadow-intensity="1" ar camera-controls auto-rotate touch-action="pan-y" alt="A 3D model carousel">
+										<div class="slider">
+											<div class="slides" id="hs-slides">
+											<button class="slide selected" onclick="switchSrc(this, 'res/hs/', '1', 'hs-view', 'hs-slides')" style="background-image: url('res/hs/1.jpg');"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/hs/', '2', 'hs-view', 'hs-slides')" style="background-image: url('res/hs/2.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/hs/', '3', 'hs-view', 'hs-slides')" style="background-image: url('res/hs/3.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/hs/', '4', 'hs-view', 'hs-slides')" style="background-image: url('res/hs/4.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/hs/', '5', 'hs-view', 'hs-slides')" style="background-image: url('res/hs/5.jpg' );"></button>
+											<button class="slide"          onclick="switchSrc(this, 'res/hs/', '6', 'hs-view', 'hs-slides')" style="background-image: url('res/hs/6.jpg' );"></button>
+											</div>
+										</div>
+									</model-viewer>
+								</header>
 							</article>
-
-
-						<!-- Posts -->
-							<section class="posts">
-								<article>
-									<header>
-										<span class="date">April 24, 2017</span>
-										<h2><a href="#">Sed magna<br />
-										ipsum faucibus</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<span class="date">April 22, 2017</span>
-										<h2><a href="#">Primis eget<br />
-										imperdiet lorem</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/pic03.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<span class="date">April 18, 2017</span>
-										<h2><a href="#">Ante mattis<br />
-										interdum dolor</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/pic04.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<span class="date">April 14, 2017</span>
-										<h2><a href="#">Tempus sed<br />
-										nulla imperdiet</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/pic05.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<span class="date">April 11, 2017</span>
-										<h2><a href="#">Odio magna<br />
-										sed consectetur</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/pic06.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
-								</article>
-								<article>
-									<header>
-										<span class="date">April 7, 2017</span>
-										<h2><a href="#">Augue lorem<br />
-										primis vestibulum</a></h2>
-									</header>
-									<a href="#" class="image fit"><img src="images/pic07.jpg" alt="" /></a>
-									<p>Donec eget ex magna. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque venenatis dolor imperdiet dolor mattis sagittis magna etiam.</p>
-									<ul class="actions special">
-										<li><a href="#" class="button">Full Story</a></li>
-									</ul>
-								</article>
-							</section>
-
-						<!-- Footer -->
-							<footer>
-								<div class="pagination">
-									<!--<a href="#" class="previous">Prev</a>-->
-									<a href="#" class="page active">1</a>
-									<a href="#" class="page">2</a>
-									<a href="#" class="page">3</a>
-									<span class="extra">&hellip;</span>
-									<a href="#" class="page">8</a>
-									<a href="#" class="page">9</a>
-									<a href="#" class="page">10</a>
-									<a href="#" class="next">Next</a>
-								</div>
-							</footer>
-
+							<article class="post featured">
+								<header class="major">
+									<span class="date"><b>CITATION</b></span>
+								</header>
+								<p>If you find our work useful in your research, please consider citing us:</p>
+								<pre>
+								<code class="code-block">
+@misc{ma2025p3sam,
+	title={P3-SAM: Native 3D Part Segmentation}, 
+	author={Changfeng Ma and Yang Li and Xinhao Yan and Jiachen Xu and Yunhan Yang and Chunshi Wang and Zibo Zhao and Yanwen Guo and Zhuo Chen and Chunchao Guo},
+	year={2025},
+	eprint={2509.06784},
+	archivePrefix={arXiv},
+	primaryClass={cs.CV},
+	url={https://arxiv.org/abs/2509.06784}, 
+}
+								</code>
+								</pre>
+							</article>
 					</div>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<section>
-							<form method="post" action="#">
-								<div class="fields">
-									<div class="field">
-										<label for="name">Name</label>
-										<input type="text" name="name" id="name" />
-									</div>
-									<div class="field">
-										<label for="email">Email</label>
-										<input type="text" name="email" id="email" />
-									</div>
-									<div class="field">
-										<label for="message">Message</label>
-										<textarea name="message" id="message" rows="3"></textarea>
-									</div>
-								</div>
-								<ul class="actions">
-									<li><input type="submit" value="Send Message" /></li>
-								</ul>
-							</form>
-						</section>
-						<section class="split contact">
-							<section class="alt">
-								<h3>Address</h3>
-								<p>1234 Somewhere Road #87257<br />
-								Nashville, TN 00000-0000</p>
-							</section>
-							<section>
-								<h3>Phone</h3>
-								<p><a href="#">(000) 000-0000</a></p>
-							</section>
-							<section>
-								<h3>Email</h3>
-								<p><a href="#">info@untitled.tld</a></p>
-							</section>
-							<section>
-								<h3>Social</h3>
-								<ul class="icons alt">
-									<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-									<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-									<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-									<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</section>
-						</section>
-					</footer>
 
 				<!-- Copyright -->
 					<div id="copyright">
-						<ul><li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li></ul>
+						<ul><li>&copy; Murcherful</li><li>2025-09-18</li></ul>
 					</div>
-
 			</div>
 
 		<!-- Scripts -->
